@@ -5,10 +5,12 @@ The app uses xml2js to convert the XML. This is relatively agnostic about the fo
 Therefore any information stored as xml can be transformed.
 
 
-The app allows the output json to formatted before storing which allows you to easily extend the app without having to rewrite code again and again.
+The app allows the output json to be formatted before storing which allows you to easily extend the app without having to rewrite code again and again.
 
 
 The XML files can be from an s3 bucket or saved locally on the server.
+
+
 *At the moment it only automatically uses a local store but access to s3 is provided.*
 
 
@@ -16,6 +18,8 @@ The app manages the xml files to ensure we have a complete list of all files fro
 It also keeps a record of the files processed so we don't lose track of what files need attention.
 
 The conversion is viewed through a UI rendered by jade(pug). 
+
+
 *A submit form has not been added but the backend API route has been added.*
 
 ## Building
@@ -43,7 +47,7 @@ which will create the dist folder.
 
 ## Documentation
 
-To build the documentation and server it to your browser it run:
+To build the documentation and server it to your browser run:
 
 ```
 npm run docs
@@ -79,7 +83,7 @@ docker stop <Your process ID>
 ```
 
 
-If you would like to see this running from digital ocean go to [http://glabs.services](http://glabs.services)
+If you would like to see this running from digital ocean go to [https://glabs.services](https://glabs.services)
 
 ## Deployment without docker
 
@@ -125,7 +129,7 @@ This class exposes the functions needed to convert the xml files to json.
 It also deals with storing the output to mongodb. 
 Furthermore, it will also search the database for projection to store in a separate database.
 This is done using mongo's aggregate function. 
-It simple takes a command and the collection name it should give the output.
+It simply takes a command and the collection name it should give the output.
 
 ### XML Manager
 
@@ -135,13 +139,16 @@ Since the app should work with remote and local files it needs to keep a store o
 * Where they are
 * Have they been processed
 
-It also need to update on certain events
+It also needs to update on certain events
 
 * Had new files been uploaded
 * Have more files been added to s3.
 
 The app is designed to expect a signal from AWS when the s3 bucket has been changed. 
 This signal will be sent to a particular route and xmlManager will get a list of all the files. 
+
+
+*The signal from s3 is not added yet but the backend node code is designed to quickly implement this*
 
 ### Server
 
@@ -154,6 +161,6 @@ The server is the entry point of the app and provides API points to:
 
 It will also initialise everything needed to run the app.
 
-*At the moment all collections in the database are removed on startup to make debugging easier.*
+**At the moment all collections in the database are removed on startup to make debugging easier.**
 
 
