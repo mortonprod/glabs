@@ -5,8 +5,9 @@ services:
     image: mortonprod/glab
     restart: unless-stopped
     volumes:
-      - ./dist/server.js:/usr/src/app/dist/server.js
-      - ./dist/keys.js:/usr/src/app/dist/keys.js
+      - ./dist:/usr/src/app/dist/
+      - ./xmlFiles:/usr/src/app/xmlFiles
+      - ./views:/usr/src/app/views
     depends_on:
       - db
     ports:
@@ -19,6 +20,6 @@ services:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
     volumes:
-      - ./data:/data/db
+      - ./db:/data/db
     ports:
       - 27017
