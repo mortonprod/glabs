@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc --outDir ./dist",
     "start": "PORT=3001 NODE_ENV=development node ./dist/server.js",
-    "start:db": "mongod --dbpath=./data/db --port 27017",
+    "docker:build": "docker-compose build",
+    "docker:start": "docker-compose up -d",
+    "start:db": "mongod --dbpath=./db --port 27017",
     "test": "mocha ./__tests__/*",
     "docs": "typedoc --tsconfig ./tsconfig.json --out docs && node serverDocs.js"
   },
