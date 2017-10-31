@@ -1,0 +1,32 @@
+{
+    "files": [
+      "./src/xmlManager/index.ts",
+      "./src/converter/index.ts",
+      "./src/server.ts"
+    ],
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "types": ["node"],
+        "typeRoots": [ "./node_modules/@types" ],
+        "removeComments": true,
+        "noImplicitAny": false,
+        "target": "es5",
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "lib": [ "es2015", "dom" ],
+        "emitDecoratorMetadata": true,
+        "noEmitOnError": false,
+        "declaration": true,
+        "sourceMap": true,
+        "outDir": "./"
+    },
+    "include": [
+        "./src/**/*",
+        "./src/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "./__tests__/*"
+    ]
+}
