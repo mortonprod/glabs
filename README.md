@@ -34,11 +34,14 @@ which will create a dist folder. The ./dist/server.js file is the entry point of
 The app had been deployed through a digital ocean droplet with the database on a docker volume.
 Check out the website. 
 
-If you want to run the docker droplet run 
+If you want to run the docker droplet build: 
 
 ```
 npm run build:docker
 ```
+
+then run with:
+
 
 ```
 npm run start:docker
