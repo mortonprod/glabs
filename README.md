@@ -20,32 +20,66 @@ The conversion is viewed through a UI rendered by jade(pug).
 
 ## Building
 
+You will need the repository:
+
+```
+git clone https://github.com/mortonprod/glabs .
+```
+
+Then you will need to install the npm packages:
+
+
+```
+npm install
+```
+
 The app is built with typescript so to transpile you will need to run 
 
 ```
 npm run build
 ```
 
-which will create a dist folder. The ./dist/server.js file is the entry point of the app.
+which will create the dist folder. 
+
+## Documentation
+
+To build the documentation and server it to your browser it run:
+
+```
+npm run docs
+```
+
+Then go to: [http://localhost:3001/](http://localhost:3001/)
+
+ServerDocs.js is the node server which will serve the static documentation assets. 
 
 
 ## Deployment with docker
 
 The app had been deployed through a digital ocean droplet with the database on a docker volume.
-Check out the website. 
 
 If you want to run the docker droplet build: 
 
 ```
-npm run build:docker
+npm run docker:build
 ```
 
-then run with:
+then run in detach mode with:
 
 
 ```
-npm run start:docker
+npm run docker:start
 ```
+
+You can then see this running at [http://localhost:3001/](http://localhost:3001/).
+Make sure to kill this afterwards using:
+
+```
+docker stop <Your process ID>
+```
+
+
+If you would like to see this running from digital ocean go to [http://glabs.services](http://glabs.services)
 
 ## Deployment without docker
 
@@ -55,7 +89,10 @@ If you want to run this on your local machine you will need to have mongodb inst
 npm run start:db
 ```
 
-to start the database. You can then start your app after building it:
+to start the database. 
+
+
+You can then start your app from another terminal after building it with:
 
 ```
 npm run start
@@ -66,7 +103,7 @@ npm run start
 
 **Note when you run the tests the databases will reset by removing all the old collections**
 
-**At the moment the keys for the s3 store are needed so only the author(me) can run the tests.**
+**The keys provided are for access to s3 only**
 
 Need to start your local version of mongodb. When this is done run: 
 
@@ -75,7 +112,7 @@ npm run start:db
 ```
 
 ```
-npm run tests
+npm run test
 ```
 
 The tests only cover the converter and xmlManager since they are the most complicated parts of the app.
@@ -100,8 +137,11 @@ Since the app should work with remote and local files it needs to keep a store o
 
 It also need to update on certain events
 
-* Had a new file been uploaded
-* Have more files been added to s3. 
+* Had new files been uploaded
+* Have more files been added to s3.
+
+The app is designed to expect a signal from AWS when the s3 bucket has been changed. 
+This signal will be sent to a particular route and xmlManager will get a list of all the files. 
 
 ### Server
 
@@ -110,7 +150,10 @@ The server is the entry point of the app and provides API points to:
 * Upload Files
 * Specify s3 directory has been modified
 * Serve UI.
+    * Will provide jade with the formated ReturnedDebitItem information from the mongodb
 
 It will also initialise everything needed to run the app.
+
+*At the moment all collections in the database are removed on startup to make debugging easier.*
 
 
