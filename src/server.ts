@@ -53,7 +53,7 @@ function format(json) {
 /**
  * Location where the xml manager should look.
  */
-const localDir = "./data/xmlFiles/";
+const localDir = "./xmlFiles/";
 
 /**
  * The information needed to link the s3 bucket.
@@ -109,10 +109,10 @@ fs.readdir(localDir, (err, files) => {
 });
 
 const app = express();
-const upload = multer({ dest: path.join(".", "data", "xmlFiles") });
+const upload = multer({ dest: path.join(".", "xmlFiles") });
 app.use(bodyParser.json());
 app.set("port", process.env.PORT || 3001);
-app.use(express.static(path.join(".", "data", "xmlFiles")));
+app.use(express.static(path.join(".", "xmlFiles")));
 app.set("views", path.join(".", "views"));
 app.set("view engine", "jade");
 
@@ -227,8 +227,8 @@ function getFilesAndErrors(files: Express.Multer.File[]): Promise<ICheck> {
                 });
             } else {
                 fs.rename(
-                    path.join(__dirname, "./data", "xmlFiles", file.filename),
-                    path.join(__dirname, "./data", "xmlFiles", file.originalname),
+                    path.join(".", "xmlFiles", file.filename),
+                    path.join(".", "xmlFiles", file.originalname),
                     () => {
                         return;
                     },
