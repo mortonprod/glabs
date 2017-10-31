@@ -1,1 +1,4 @@
 /data/db
+/node_modules
+/dist
+/docs
