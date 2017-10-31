@@ -1,0 +1,98 @@
+mixin debit-item(item)
+    tr.debit
+        td= item.bankName 
+        td= item.branchName
+        td= item.currency
+        td= item.name
+        td= item.number
+        td= item.originalProcessingDate
+        td= item.ref
+        td= item.returnCode
+        td= item.returnDescription
+        td= item.sortCode
+        td= item.transCode
+        td= item.valueOf                                                
+doctype html
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title=title
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet")
+    style(type='text/css').
+        .debit-table {
+            width:100%;
+            table-layout: fixed;
+        }
+        .debit-tr > th{
+            text-align: center;
+        }
+        .debit {
+            text-align: center;
+            color: #7a7a7a;
+            width:100vw;
+        }
+        p{
+            color: #7a7a7a;            
+        }
+  body
+    header.jumbotron(style="text-align:center;color:blue")
+        h1.page-header Glab Utilities
+    section.container(style="text-align:center")
+        div.row
+            div.col
+                p 
+                    |Welcome to the Glab utility page. 
+                    |At the moment it will only display converted results of bank transactions from data on the server.
+                    |However the node backend will query a s3 bucket using the AWS-SDK and keeps a record of what files are on the remote s3 bucket.
+                    |This means the backend can be easily expanded to convert the files on an s3 bucket as well.
+                    |The app was designed to work with a local store and remote s3 bucket together. 
+                    |Furthermore the app was designed to expect a signal from AWS when more remote files are added.
+                    span(style="color:red") This is not setup yet but this would not take much time to do.
+                p 
+                    |The backend also included a route to upload xml files.
+                    |This route uses multer to upload an array of binary xml files.
+                    |When uploaded some basic checks are performed, the files are then converted to json and stored.
+                    |  Furthermore, as requested, the 
+                    span(style="color:green") ReturnedDebitItem
+                    |  fields are saved in a separate collection.
+                    |This is done in a generic way using mongo aggregate with any command and collection name being able to be stored.
+                    |This allows any nested object to be stored separately, not just 
+                    span(style="color:green") ReturnedDebitItem
+                    |.
+                p(style="font-weight:bold")
+                    | The UI is created using jade(pug) since we only need a simple static page.
+                    | You could have all sorts of fun with service workers, SPAs and SSR but that would take more than a couple of days :-). 
+                p(style="color:blue")
+                    |Basically the sky is the limit with this simple demonstrative app since most of the hard work is done. 
+                    |That includes documentation, testing and deployment. 
+                    |See below for some of the converted results or check out the github for more details.
+                p(style="color:red")
+                    | The page is not responsive but this would not be the hardest thing to add.
+                p(style="color:orange")
+                    | Each header signifies a different file. All files are the same since I only got one example xml :-).
+                
+
+        div.row
+            for file in files
+                table.debit-table
+                    thead
+                        tr.debit-tr
+                            th Bank Name
+                            th Branch Name
+                            th Currency
+                            th Name
+                            th Number
+                            th Original Processing Date
+                            th Ref
+                            th Return Code
+                            th Return Description
+                            th Sort Code
+                            th Trans Code
+                            th Value Of
+                    tbody
+                        for item in file
+                            +debit-item(item)
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
