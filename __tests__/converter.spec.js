@@ -7,8 +7,8 @@ const info = require("../dist/keys.js").obj;
 
 const fileName = "sample.xml";
 const fileName2 = "sample2.xml";
-var xml = fs.readFileSync(path.join("data","xmlFiles", fileName), 'utf8');
-var xml2 = fs.readFileSync(path.join("data","xmlFiles", fileName2), 'utf8');
+var xml = fs.readFileSync(path.join("xmlFiles", fileName), 'utf8');
+var xml2 = fs.readFileSync(path.join("xmlFiles", fileName2), 'utf8');
 
 
 /**

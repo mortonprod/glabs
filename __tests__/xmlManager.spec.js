@@ -7,7 +7,7 @@ const dbOptions = {
     location: "mongodb://127.0.0.1:27017",
 }
 
-const localDir = "./data/xmlFiles/";
+const localDir = "./xmlFiles/";
 
 const s3Info = {
     bucketName: "glabs-example-data",
