@@ -6,7 +6,7 @@ import {parseString} from "xml2js";
  * This class is concerned with converting xml to json and storing the result of the transformation.
  * The json produced can then be formated using a function passed through the constructor.
  * The convert function is the public function to do this.
- * It can also create a new collection with a projection of the full documents stored.
+ * It can also create a new collection with a projection of all documents stored.
  * Search is the public function to get the projection of each document in the collection.
  */
 export class Converter {
@@ -75,9 +75,10 @@ export class Converter {
     /**
      * This function will store the result of an aggregate search.
      * The search will be stored in a new collection with the name specified as an argument.
-     * Those objects are then stored in a unique database which is named using the object key.
      * Note each time the function is called the collection stored will be dropped and filled again.
-     * THIS FUNCTION WILL PROCESS ALL FILE EACH TIME. THIS IS PROBABLY NOT THE BEST WAY...
+     * //
+     * //
+     * THIS FUNCTION WILL PROCESS ALL FILES EACH TIME. THIS IS PROBABLY NOT THE BEST WAY...
      * @param collectionName The name to give the new collection.
      * @param aggCommand The command to get the new document to store in the collection.
      */

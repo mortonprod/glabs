@@ -57,8 +57,6 @@ const localDir = "./xmlFiles/";
 
 /**
  * The information needed to link the s3 bucket.
- * The key is imported and not included in the github repository.
- * This means you can not run this without adding your own keys.
  */
 const s3Info = {
     bucketKey: "exampleData",

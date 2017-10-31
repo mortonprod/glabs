@@ -82,6 +82,7 @@ export class XmlManager {
     /**
      * This function will update the database when a local file has been added.
      * It checks all the files and stores the new ones added.
+     * //
      * You could also pass a list of the files but it's simpler to just check the directory.
      */
     public uploadAddAll() {
@@ -113,7 +114,7 @@ export class XmlManager {
         });
     }
     /**
-     * This function will change a files information.
+     * This function will change a file's information.
      * It is used to specify when a file has been processed or moved from local storage to s3(remote).
      */
     public updateFile(input: {name: string; location: string; processed: string}) {
