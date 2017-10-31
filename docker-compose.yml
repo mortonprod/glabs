@@ -1,0 +1,24 @@
+version: '2'
+services:
+  glab:
+    build: .
+    image: mortonprod/glab
+    restart: unless-stopped
+    volumes:
+      - ./dist/server.js:/usr/src/app/dist/server.js
+      - ./dist/keys.js:/usr/src/app/dist/keys.js
+    depends_on:
+      - db
+    ports:
+      - "3001:3001"
+  db: 
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 27017
